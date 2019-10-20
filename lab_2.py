@@ -5,9 +5,9 @@ class Country:
         self.coord_c_2 = tuple(coord_2)
         self.list_cities = list_cities
 
-    def get_cities(self):
-        for city in self.list_cities:
-            yield city
+    # def get_cities(self):
+    #     for city in self.list_cities:
+    #         yield city
 
     def __str__(self):
         return '{} - A({}) B({}); count cities - {}'.format(self.name, self.coord_c_1, self.coord_c_2,
@@ -17,10 +17,10 @@ class Country:
         tmp_list = []
         for city in self.list_cities:
             if city.finish_exchange:
-                tmp_list.append(1)
-        if len(self.list_cities) == len(tmp_list):
-            return True
-        return False
+                tmp_list.append(True)
+        return len(self.list_cities) == len(tmp_list)
+            # return True
+        # return False
 
 
 class City:
@@ -44,20 +44,20 @@ class City:
         print(self.all_money)
 
     def give_money_siblings(self):
-        new_l = []
+        count_not_empty_items = []
         for price in self.other_money_country:
             # print(price)
             if price > 0:
-                new_l.append(True)
-        count_not_empty_items = []
-        for i in range(self.all_count_countries):
-            # print(i)
-            try:
-                if new_l[i]:
-                    count_not_empty_items.append(True)
-            except Exception as e:
-                # print(e)
-                pass
+                count_not_empty_items.append(True)
+        # count_not_empty_items = []
+        # for i in range(self.all_count_countries):
+        #     # print(i)
+        #     try:
+        #         if new_l[i]:
+        #             count_not_empty_items.append(True)
+        #     except Exception as e:
+        #         # print(e)
+        #         pass
         if len(count_not_empty_items) == self.all_count_countries:
             self.finish_exchange = True
 
@@ -89,7 +89,7 @@ def main():
             for y in range(county_coords_1[1], county_coords_2[1] + 1):
                 for x in range(county_coords_1[0], county_coords_2[0] + 1):
                     new_city = City(x=x, y=y, all_count_countries=total_count, index=total_count - count_coutry)
-                    new_city.print_info()
+                    # new_city.print_info()
                     cities_list.append(new_city)
 
             new_country = Country(name=name,
@@ -104,31 +104,31 @@ def main():
             print('generate county with cities end!!!!!!')
 
             def build_all_matrix(list_country):
-                xs = []
-                ys = []
-                for c in list_country:
-                    xs.extend((c.coord_c_1[0], c.coord_c_2[0]))
-                    ys.extend((c.coord_c_1[1], c.coord_c_2[1]))
-                min_x = min(xs)
-                max_x = max(xs)
-                min_y = min(ys)
-                max_y = max(ys)
-                y_range = range(max_y - min_y + 1)
-                x_range = range(max_x - min_x + 1)
+                # xs = []
+                # ys = []
+                # for c in list_country:
+                #     xs.extend((c.coord_c_1[0], c.coord_c_2[0]))
+                #     ys.extend((c.coord_c_1[1], c.coord_c_2[1]))
+                # min_x = min(xs)
+                # max_x = max(xs)
+                # min_y = min(ys)
+                # max_y = max(ys)
+                # y_range = range(max_y - min_y + 1)
+                # x_range = range(max_x - min_x + 1)
                 matrix = []
-                for _ in x_range:
+                for _ in range(10):
                     sub_list = []
-                    for _ in y_range:
+                    for _ in range(10):
                         sub_list.append(None)
                     matrix.append(sub_list)
                 return matrix
                 # return [[None for j in y_range] for i in x_range]
 
             all_matrix = build_all_matrix(list_country=all_countries)
-        print( all_matrix)
+        # print( all_matrix)
         for country in all_countries:
-            current_city = list(country.get_cities())
-            for city in current_city:
+            # print (country)
+            for city in country.list_cities:
                 all_matrix[city.coord_city_x - 1][city.coord_city_y - 1] = city
 
         width = len(all_matrix)
@@ -169,11 +169,12 @@ def main():
                 for city in country.list_cities:
                     city.end_day()
             days += 1
+
         for key in result:
-            print('{} {}'.format(key, result[key]))
+            print('{} - {}'.format(key, result[key]))
     except Exception as e:
         pass
-        # print(e)
+
 
 
 if __name__ == '__main__':
