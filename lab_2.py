@@ -5,9 +5,6 @@ class Country:
         self.coord_c_2 = tuple(coord_2)
         self.list_cities = list_cities
 
-    # def get_cities(self):
-    #     for city in self.list_cities:
-    #         yield city
 
     def __str__(self):
         return '{} - A({}) B({}); count cities - {}'.format(self.name, self.coord_c_1, self.coord_c_2,
@@ -19,8 +16,7 @@ class Country:
             if city.finish_exchange:
                 tmp_list.append(True)
         return len(self.list_cities) == len(tmp_list)
-            # return True
-        # return False
+
 
 
 class City:
@@ -49,15 +45,7 @@ class City:
             # print(price)
             if price > 0:
                 count_not_empty_items.append(True)
-        # count_not_empty_items = []
-        # for i in range(self.all_count_countries):
-        #     # print(i)
-        #     try:
-        #         if new_l[i]:
-        #             count_not_empty_items.append(True)
-        #     except Exception as e:
-        #         # print(e)
-        #         pass
+
         if len(count_not_empty_items) == self.all_count_countries:
             self.finish_exchange = True
 
