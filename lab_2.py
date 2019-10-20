@@ -158,8 +158,13 @@ def main():
                 if country_1.country_finish():
                     if country_1.name not in result:
                         result[country_1.name] = days - 1
-            if all(map(lambda x: x.country_finish(), all_countries)):
+            finish = []
+            for coun in all_countries:
+                if coun.country_finish():
+                    finish.append(True)
+            if len(finish) == len(all_countries):
                 break
+
             for country in all_countries:
                 for city in country.list_cities:
                     city.end_day()
