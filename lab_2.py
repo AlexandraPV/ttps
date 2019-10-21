@@ -63,7 +63,16 @@ class City:
 
 
 def main():
-    count_coutry = int(input('Count country >>> '))
+    # count_coutry = int(input('Count country >>> '))
+    while True:
+        try:
+            count_coutry = int(input('Count country >>> '))
+            break
+        except ValueError as e:
+            print('invalid number')
+    # if not isinstance(count_coutry, int):
+    #     print("enter number")
+
     total_count = count_coutry
     all_countries = []
     # index = 0
@@ -71,8 +80,19 @@ def main():
 
         while count_coutry:
             name = input('Enter name country >>> ')
-            county_coords_1 = tuple(map(int, input('Enter first coordinate for country >>>').replace(' ', '')))
-            county_coords_2 = tuple(map(int, input('Enter second coordinate for country >>>').replace(' ', '')))
+            loop = True
+            while loop:
+
+                try:
+                    county_coords_1 = tuple(map(int, input('Enter first coordinate for country >>>').split(' ')))
+                    county_coords_2 = tuple(map(int, input('Enter second coordinate for country >>>').split(' ')))
+                    # print('county_coords_1', county_coords_1, 'county_coords_2', county_coords_2)
+                    if not (all(1 <= x <= 10 for x in county_coords_1) and all(1 <= x <= 10 for x in county_coords_2)):
+                        raise ValueError
+                    else:
+                        loop = False
+                except ValueError as e:
+                    print('invalid range (1-10)')
             cities_list = []
             for y in range(county_coords_1[1], county_coords_2[1] + 1):
                 for x in range(county_coords_1[0], county_coords_2[0] + 1):
@@ -161,7 +181,7 @@ def main():
         for key in result:
             print('{} - {}'.format(key, result[key]))
     except Exception as e:
-        pass
+        print("Can`t do this")
 
 
 
