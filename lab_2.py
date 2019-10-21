@@ -177,11 +177,16 @@ def main():
                 for city in country.list_cities:
                     city.end_day()
             days += 1
+            if days == 1000:
+                print("Can`t calc")
+                break
+        if days < 1000:
+            for key in result:
+                print('{} - {}'.format(key, result[key]))
 
-        for key in result:
-            print('{} - {}'.format(key, result[key]))
+
     except Exception as e:
-        print("Can`t do this")
+        pass
 
 
 
