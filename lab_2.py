@@ -1,3 +1,8 @@
+MAX_ITERATIONS = 10000
+MATRIX_SIZE = 10
+START_COIN_COUNT = 1e6
+COIN_COUNT_FOR_ONE_GIVE = 1000
+
 class Country:
     def __init__(self, coord_1, coord_2, name, list_cities=[]):
         self.name = name
@@ -29,7 +34,7 @@ class City:
         self.all_count_countries = all_count_countries
         self.other_money_country = [0] * all_count_countries
         self.all_money = [0] * all_count_countries
-        self.all_money[index] = 1e6
+        self.all_money[index] = START_COIN_COUNT
 
     def __str__(self):
         return 'city {} {}'.format(self.coord_city_x, self.coord_city_y)
@@ -50,8 +55,8 @@ class City:
             self.finish_exchange = True
 
         for index, coin_for_other in enumerate(self.other_money_country):
-            if coin_for_other >= 1000:
-                share = coin_for_other // 1000
+            if coin_for_other >= COIN_COUNT_FOR_ONE_GIVE:
+                share = coin_for_other // COIN_COUNT_FOR_ONE_GIVE
                 for city in self.siblings:
                     city.all_money[index] += share
                     self.other_money_country[index] -= share
@@ -87,7 +92,7 @@ def main():
                     county_coords_1 = tuple(map(int, input('Enter first coordinate for country >>>').split(' ')))
                     county_coords_2 = tuple(map(int, input('Enter second coordinate for country >>>').split(' ')))
                     # print('county_coords_1', county_coords_1, 'county_coords_2', county_coords_2)
-                    if not (all(1 <= x <= 10 for x in county_coords_1) and all(1 <= x <= 10 for x in county_coords_2)):
+                    if not (all(1 <= x <= MATRIX_SIZE for x in county_coords_1) and all(1 <= x <= MATRIX_SIZE for x in county_coords_2)):
                         raise ValueError
                     else:
                         loop = False
@@ -124,9 +129,9 @@ def main():
                 # y_range = range(max_y - min_y + 1)
                 # x_range = range(max_x - min_x + 1)
                 matrix = []
-                for _ in range(10):
+                for _ in range(MATRIX_SIZE):
                     sub_list = []
-                    for _ in range(10):
+                    for _ in range(MATRIX_SIZE):
                         sub_list.append(None)
                     matrix.append(sub_list)
                 return matrix
@@ -177,10 +182,10 @@ def main():
                 for city in country.list_cities:
                     city.end_day()
             days += 1
-            if days == 1000:
+            if days == MAX_ITERATIONS:
                 print("Can`t calc")
                 break
-        if days < 1000:
+        if days < MAX_ITERATIONS:
             for key in result:
                 print('{} - {}'.format(key, result[key]))
 
