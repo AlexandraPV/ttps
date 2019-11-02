@@ -16,11 +16,7 @@ class Country:
                                                             len(self.list_cities))
 
     def country_finish(self):
-        tmp_list = []
-        for city in self.list_cities:
-            if city.finish_exchange:
-                tmp_list.append(True)
-        return len(self.list_cities) == len(tmp_list)
+        return all(map(lambda c: c.finish_exchange, self.list_cities))
 
 
 
