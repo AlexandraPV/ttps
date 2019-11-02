@@ -140,8 +140,8 @@ def main():
             for city in country.list_cities:
                 all_matrix[city.coord_city_x - 1][city.coord_city_y - 1] = city
 
-        width = len(all_matrix)
-        heigth = len(all_matrix[0])
+        width = MATRIX_SIZE
+        heigth = MATRIX_SIZE
 
         for x in range(width):
             for y in range(heigth):
