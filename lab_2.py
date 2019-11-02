@@ -16,9 +16,9 @@ class Country:
                                                             len(self.list_cities))
 
     def country_finish(self):
-        return all(map(lambda c: c.finish_exchange, self.list_cities))
-
-
+        for city in self.list_cities:
+            if not city.finish_exchange:
+                return False
 
 class City:
     def __init__(self, x, y, all_count_countries, index):
