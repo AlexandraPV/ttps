@@ -81,6 +81,9 @@ def main():
 
         while count_coutry:
             name = input('Enter name country >>> ')
+            while len(name) > 25:
+                name = input('Enter name country >>> ')
+
             loop = True
             while loop:
 
