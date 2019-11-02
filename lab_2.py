@@ -115,18 +115,7 @@ def main():
         else:
             print('generate county with cities end!!!!!!')
 
-            def build_all_matrix(list_country):
-                # xs = []
-                # ys = []
-                # for c in list_country:
-                #     xs.extend((c.coord_c_1[0], c.coord_c_2[0]))
-                #     ys.extend((c.coord_c_1[1], c.coord_c_2[1]))
-                # min_x = min(xs)
-                # max_x = max(xs)
-                # min_y = min(ys)
-                # max_y = max(ys)
-                # y_range = range(max_y - min_y + 1)
-                # x_range = range(max_x - min_x + 1)
+            def build_all_matrix():
                 matrix = []
                 for _ in range(MATRIX_SIZE):
                     sub_list = []
@@ -136,7 +125,7 @@ def main():
                 return matrix
                 # return [[None for j in y_range] for i in x_range]
 
-            all_matrix = build_all_matrix(list_country=all_countries)
+            all_matrix = build_all_matrix()
         # print( all_matrix)
         for country in all_countries:
             # print (country)
