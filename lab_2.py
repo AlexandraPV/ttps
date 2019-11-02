@@ -68,6 +68,8 @@ def main():
     while True:
         try:
             count_coutry = int(input('Count country >>> '))
+            while count_coutry > 20 or count_coutry < 1:
+                count_coutry = int(input('Count country >>> '))
             break
         except ValueError as e:
             print('invalid number')
